@@ -1,6 +1,7 @@
 package com.learning.forecastmvvm.data.network
 
 import com.learning.forecastmvvm.data.network.response.CurrentWeatherResponse
+import com.learning.forecastmvvm.data.network.response.FutureWeatherResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -20,10 +21,19 @@ interface ApixuWeatherApiService {
         @Query("lang") languageCode: String = "en"
     ): CurrentWeatherResponse
 
+    // https://api.apixu.com/v1/forecast.json?key=b90a48fdf4d74925b9085429191206&q=London&days=7
+    @GET("forecast.json")
+    suspend fun getFutureWeather(
+        @Query("q") location: String,
+        @Query("days") days: Int,
+        @Query("lang") languageCode: String = "en"
+    ): FutureWeatherResponse
+
     companion object {
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): ApixuWeatherApiService {
             val requestInterceptor = Interceptor { chain ->
-                val url = chain.request().url().newBuilder().addQueryParameter("key",
+                val url = chain.request().url().newBuilder().addQueryParameter(
+                    "key",
                     API_KEY
                 ).build()
                 val request = chain.request().newBuilder().url(url).build()
