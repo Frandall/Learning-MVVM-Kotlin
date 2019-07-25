@@ -5,18 +5,14 @@ import com.learning.forecastmvvm.data.provider.UnitProvider
 import com.learning.forecastmvvm.data.repository.ForecastRepository
 import com.learning.forecastmvvm.internal.UnitSystem
 import com.learning.forecastmvvm.internal.lazyDeferred
+import com.learning.forecastmvvm.ui.base.WeatherViewModel
 
 class CurrentWeatherViewModel(
     private val forecastRepository: ForecastRepository,
     unitProvider: UnitProvider
-) : ViewModel() {
-    private val unitSystem = unitProvider.getUnitSystem()
-    val isMetric: Boolean
-        get() = unitSystem == UnitSystem.METRIC
+) : WeatherViewModel(forecastRepository, unitProvider) {
+
     val weather by lazyDeferred {
-        forecastRepository.getCurrentWeather(isMetric)
-    }
-    val weatherLocation by lazyDeferred {
-        forecastRepository.getWeatherLocation()
+        forecastRepository.getCurrentWeather(super.isMetricUnit)
     }
 }
