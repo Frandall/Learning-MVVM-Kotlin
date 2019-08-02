@@ -2,8 +2,8 @@ package com.learning.forecastmvvm.ui.weather.future.list
 
 import com.bumptech.glide.Glide
 import com.learning.forecastmvvm.R
-import com.learning.forecastmvvm.data.db.unitlocalized.future.MetricSimpleFutureWeatherEntry
-import com.learning.forecastmvvm.data.db.unitlocalized.future.UnitSpecificSimpleFutureWeatherEntry
+import com.learning.forecastmvvm.data.db.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
+import com.learning.forecastmvvm.data.db.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_future_weather.*
